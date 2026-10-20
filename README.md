@@ -29,4 +29,4 @@ IT Projects (status)
 		}
 	]
 }
-</script>
+
