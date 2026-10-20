@@ -2,31 +2,6 @@
 IT Projects (status)
 # Status Matter-лампы
 
-<script type="application/ld+json">
-{
-	"@context": "http://schema.org/",
-	"@type": "Recipe",
-	"name": "",
-	"image": [
-		""
-	],
-	"recipeYield": "",
-	"datePublished": "2026-11-25",
-	"author": {
-		"@type": "Person",
-		"name": ""
-	},
-	"nutrition": {
-		"@type": "NutritionInformation"
-	},
-	"recipeIngredient": [
-		""
-	],
-	"recipeInstructions": [
-		{
-			"@type": "HowToStep",
-			"text": ""
-		}
-	]
-}
-
+<video controls height="220" width="390">
+	<source src="/media/video.mp4" type="video/mp4">
+</video>
