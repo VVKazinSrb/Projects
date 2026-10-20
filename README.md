@@ -1,9 +1,3 @@
-
-# Status Реле 1 и 2 канала
-IT Projects (status)
-# Status Matter-лампы
-
-//тестирование страницы
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -76,7 +70,7 @@ IT Projects (status)
 <div class="wrap">
 
   <header>
-    <h1>Трудозатраты «Хаб 2.0 для РубАрх»</h1>
+    <h1>Трудозатраты «Хаб 2.0 для Руб-Арх»</h1>
     <p class="sub">План по командам и месяцам · версия файла 1.4</p>
   </header>
 
