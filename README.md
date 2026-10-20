@@ -2,6 +2,31 @@
 IT Projects (status)
 # Status Matter-лампы
 
-<button type="button" name="myButton" autofocus disabled>
-	Click me!
-</button>
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org/",
+	"@type": "Recipe",
+	"name": "",
+	"image": [
+		""
+	],
+	"recipeYield": "",
+	"datePublished": "2026-11-25",
+	"author": {
+		"@type": "Person",
+		"name": ""
+	},
+	"nutrition": {
+		"@type": "NutritionInformation"
+	},
+	"recipeIngredient": [
+		""
+	],
+	"recipeInstructions": [
+		{
+			"@type": "HowToStep",
+			"text": ""
+		}
+	]
+}
+</script>
