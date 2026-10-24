@@ -1,212 +1,197 @@
+<!doctype html>
 <html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Трудозатраты Хаб 2.0 для РубАрх — ver.1.4</title>
-<style>
-  :root {
-    --bg: #f5f6f8;
-    --card: #ffffff;
-    --ink: #1c2530;
-    --muted: #6b7785;
-    --line: #e2e6ec;
-    --accent: #2f6fed;
-    --accent-soft: #eaf1fe;
-    --head: #22303f;
+  <head><script>var __mr='all',__md='3amyjd62.qwenwork.page';document.addEventListener('DOMContentLoaded', function () {
+  var BAR_HEIGHT = 48;
+  var BRAND_URL = 'https://qwenwork.ai/';
+  // 品牌资源直接引用官网上的国际版资产（与 CN 版引用 CDN 图片的做法一致）：注入脚本会
+  // 进到每个用户页面，内联 data URI 会让每个 HTML 响应都多背十几 KB。
+  var LOGO_URL = 'https://qwenwork.ai/assets/website-global/qwenwork-logo.svg';
+  var FAVICON_URL = 'https://qwenwork.ai/app/favicon.svg';
+  var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!isDark) {
+    try {
+      var sample = getComputedStyle(document.body).backgroundColor;
+      if (sample === 'rgba(0, 0, 0, 0)' || sample === 'transparent') {
+        sample = getComputedStyle(document.documentElement).backgroundColor;
+      }
+      if (sample && sample !== 'rgba(0, 0, 0, 0)' && sample !== 'transparent') {
+        var m = sample.match(/\d+/g);
+        if (m) {
+          var brightness = (parseInt(m[0]) * 299 + parseInt(m[1]) * 587 + parseInt(m[2]) * 114) / 1000;
+          isDark = brightness < 128;
+        }
+      }
+    } catch (e) {}
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 32px 20px 64px;
-    background: var(--bg);
-    color: var(--ink);
-    font: 15px/1.5 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  var SHARED_CSS = '<style>' +
+    '.mulepage-close-dark{color:rgba(255,255,255,0.3);transition:color 0.2s ease}' +
+    '.mulepage-close-dark:hover{color:#ffffff}' +
+    '.mulepage-close-light{color:rgba(0,0,0,0.3);transition:color 0.2s ease}' +
+    '.mulepage-close-light:hover{color:#000000}' +
+    '#mulepage-footer-link{display:inline-flex;align-items:center;line-height:0;outline:none}' +
+    '.mulepage-footer-brand{display:inline-flex;align-items:center;box-sizing:border-box;height:32px;max-width:156px;overflow:hidden;padding:4px 12px;border-radius:999px;background:' + (isDark ? 'rgba(26,26,26,0.85)' : 'rgba(255,255,255,0.85)') + ';backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 0 0 0.5px ' + (isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)') + ',0 8px 24px -4px ' + (isDark ? 'rgba(0,0,0,0.28)' : 'rgba(0,0,0,0.07)') + ';transition:max-width 260ms cubic-bezier(0.22,1,0.36,1);will-change:max-width;white-space:nowrap}' +
+    '.mulepage-footer-brand-hint{display:inline-block;max-width:0;margin-left:0;overflow:hidden;opacity:0;color:' + (isDark ? 'rgba(255,255,255,0.72)' : 'rgba(0,0,0,0.64)') + ';font-size:14px;font-weight:400;line-height:20px;transition:max-width 260ms cubic-bezier(0.22,1,0.36,1),margin-left 260ms cubic-bezier(0.22,1,0.36,1),opacity 180ms ease-out;will-change:max-width,opacity}' +
+    '#mulepage-footer:hover .mulepage-footer-brand,#mulepage-footer:focus-within .mulepage-footer-brand{max-width:360px}' +
+    '#mulepage-footer:hover .mulepage-footer-brand-hint,#mulepage-footer:focus-within .mulepage-footer-brand-hint{max-width:188px;margin-left:8px;opacity:1}' +
+    '.mulepage-float-close{display:inline-flex;align-items:center;justify-content:center;max-width:0;margin-left:0;overflow:hidden;opacity:0;transition:max-width 0.2s ease,margin-left 0.2s ease,opacity 0.15s ease;padding:0;border:none;background:none;cursor:pointer;font-size:16px;line-height:1;font-weight:300;height:16px;will-change:max-width,opacity}' +
+    '.mulepage-float:hover .mulepage-float-close{max-width:14px;margin-left:4px;opacity:1}' +
+    '</style>';
+  document.head.insertAdjacentHTML('beforeend', SHARED_CSS);
+
+  var brandAssetFilter = isDark ? 'filter:invert(1);' : '';
+  var BRAND_MARK = '<img src="' + LOGO_URL + '" alt="QwenWork" width="132" height="24" style="display:block;user-select:none;' + brandAssetFilter + '" />';
+  var TOP_BRAND_LOGO = '<span style="display:inline-flex;align-items:center;justify-content:center;width:156px;height:32px;padding:4px 12px;box-sizing:border-box;border-radius:999px;' +
+    'background:' + (isDark ? 'rgba(255,255,255,0.12)' : '#f5f5f5') + ';">' + BRAND_MARK + '</span>';
+  var FOOTER_BRAND_LOGO = '<span class="mulepage-footer-brand">' + BRAND_MARK +
+    '<span class="mulepage-footer-brand-hint">AI-generated. Please verify.</span></span>';
+
+  var bannerBg = isDark ? '#050505' : '#ffffff';
+  var bannerBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)';
+  var bannerColor = isDark ? '#fff' : '#000';
+  var bannerDividerColor = isDark ? 'rgba(255,255,255,0.24)' : 'rgba(0,0,0,0.16)';
+  var bannerCloseClass = isDark ? 'mulepage-close-dark' : 'mulepage-close-light';
+
+  var BANNER = '<div id="mulepage-bar" dir="ltr" style="position:fixed;top:0;left:0;width:100%;height:' + BAR_HEIGHT + 'px;' +
+    'background:' + bannerBg + ';border-bottom:1px solid ' + bannerBorder + ';color:' + bannerColor + ';' +
+    'box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:8px;' +
+    'font-family:Inter,-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;' +
+    'font-size:14px;font-weight:500;line-height:20px;z-index:2147483647;">' +
+    '<span aria-hidden="true" style="flex:1 1 0;height:32px;"></span>' +
+    '<div style="display:flex;align-items:center;gap:8px;white-space:nowrap;">' +
+    '<span>Created with</span>' +
+    '<span id="mulepage-bar-link" role="link" tabindex="0" aria-label="Open QwenWork" style="display:inline-flex;align-items:center;cursor:pointer;line-height:0;">' +
+    TOP_BRAND_LOGO + '</span>' +
+    '<span aria-hidden="true" style="width:1px;height:16px;margin:0 4px;background:' + bannerDividerColor + ';"></span>' +
+    '<span id="mulepage-bar-cta" role="link" tabindex="0" aria-label="Create a website with QwenWork" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:999px;cursor:pointer;">' +
+    '<span>Create your website with AI</span><span aria-hidden="true" style="font-size:16px;line-height:16px;">\u2192</span></span>' +
+    '</div>' +
+    '<span style="flex:1 1 0;display:flex;justify-content:flex-end;align-items:center;">' +
+    '<button id="mulepage-bar-close" class="' + bannerCloseClass + '" aria-label="Close QwenWork branding bar" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:8px;background:none;border:none;border-radius:999px;' +
+    'font-size:18px;cursor:pointer;line-height:16px;font-weight:300;">\u00d7</button></span>' +
+    '</div>';
+
+  var floatCloseColor = isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.3)';
+  var floatCloseHover = isDark ? '#ffffff' : '#000000';
+  var FOOTER = '<div id="mulepage-footer" dir="ltr" class="mulepage-float" style="position:fixed !important;bottom:16px !important;right:16px !important;z-index:2147483646;' +
+    'display:inline-flex;align-items:center;padding:0;cursor:pointer;background:transparent;border:0;box-shadow:none;' +
+    'font-family:Inter,-apple-system,BlinkMacSystemFont,\'Segoe UI\',\'Helvetica Neue\',sans-serif;">' +
+    '<span id="mulepage-footer-link" role="link" tabindex="0" aria-label="Open QwenWork" style="display:inline-flex;align-items:center;line-height:0;">' +
+    FOOTER_BRAND_LOGO + '</span></div>';
+
+  var openQwenWork = function (content) {
+    window.open(BRAND_URL + '?utm_source=pages&utm_medium=banner&utm_campaign=pages_branding&utm_content=' + content, '_blank', 'noopener');
+  };
+  var bindActivation = function (element, content) {
+    if (!element) return;
+    element.addEventListener('click', function () { openQwenWork(content); });
+    element.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openQwenWork(content); }
+    });
+  };
+
+  if (__mr === 'all') {
+    document.body.insertAdjacentHTML('afterbegin', BANNER);
+    bindActivation(document.getElementById('mulepage-bar-link'), 'top_bar');
+    bindActivation(document.getElementById('mulepage-bar-cta'), 'top_bar');
+
+    var existingIcon = document.querySelector('link[rel="icon"],link[rel="shortcut icon"]');
+    if (!existingIcon) {
+      var fi = document.createElement('link');
+      fi.rel = 'icon';
+      fi.type = 'image/svg+xml';
+      fi.href = FAVICON_URL;
+      document.head.appendChild(fi);
+    }
+
+    var origPT = parseFloat(getComputedStyle(document.body).paddingTop) || 0;
+    document.body.style.paddingTop = (origPT + BAR_HEIGHT) + 'px';
+    var all = document.querySelectorAll('*');
+    var shifted = [];
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el.id && el.id.indexOf('mulepage') === 0) continue;
+      var cs = getComputedStyle(el);
+      if (cs.position === 'fixed') {
+        var t = parseFloat(cs.top);
+        if (isNaN(t)) t = 0;
+        el.style.top = (t + BAR_HEIGHT) + 'px';
+        shifted.push({ el: el, orig: t });
+      }
+    }
+    document.getElementById('mulepage-bar-close').addEventListener('click', function () {
+      document.getElementById('mulepage-bar').remove();
+      document.body.style.paddingTop = origPT + 'px';
+      for (var j = 0; j < shifted.length; j++) shifted[j].el.style.top = shifted[j].orig + 'px';
+    });
   }
-  .wrap { max-width: 1180px; margin: 0 auto; }
-  header h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -.02em; }
-  header p.sub { margin: 0; color: var(--muted); font-size: 14px; }
-  .meta { margin: 14px 0 26px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
-    padding: 5px 12px; font-size: 13px; color: var(--muted);
+
+  if (__mr) {
+    document.body.insertAdjacentHTML('beforeend', FOOTER);
+    bindActivation(document.getElementById('mulepage-footer-link'), 'bottom_bar');
+    if (__mr === 'footer') {
+      var floatEl = document.getElementById('mulepage-footer');
+      if (floatEl) {
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'mulepage-float-close';
+        closeBtn.style.color = floatCloseColor;
+        closeBtn.setAttribute('aria-label', 'Close QwenWork badge');
+        closeBtn.textContent = '\u00d7';
+        closeBtn.addEventListener('mouseenter', function () { closeBtn.style.color = floatCloseHover; });
+        closeBtn.addEventListener('mouseleave', function () { closeBtn.style.color = floatCloseColor; });
+        closeBtn.addEventListener('click', function (event) { event.stopPropagation(); floatEl.remove(); });
+        floatEl.appendChild(closeBtn);
+      }
+    }
   }
-  .chip b { color: var(--ink); font-weight: 600; }
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 30px; }
-  .kpi {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 16px 18px;
+
+  var canon = document.createElement('link');
+  canon.rel = 'canonical';
+  canon.href = 'https://' + location.hostname + '/';
+  document.head.appendChild(canon);
+
+  var ogDomain = __md;
+  var ogTitle = document.title || ogDomain;
+  var ogTags = [
+    ['og:title', ogTitle],
+    ['og:url', 'https://' + location.hostname + '/'],
+    ['og:type', 'website'],
+    ['og:image', 'https://qwenwork.page/og/' + ogDomain + '.webp']
+  ];
+  for (var n = 0; n < ogTags.length; n++) {
+    var existing = document.querySelector('meta[property="' + ogTags[n][0] + '"]');
+    if (existing) existing.remove();
+    var meta = document.createElement('meta');
+    meta.setAttribute('property', ogTags[n][0]);
+    meta.setAttribute('content', ogTags[n][1]);
+    document.head.appendChild(meta);
   }
-  .kpi .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-  .kpi .val { font-size: 26px; font-weight: 700; margin-top: 6px; }
-  .kpi .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
-  .kpi.hl { background: var(--accent-soft); border-color: #c9dcff; }
-  .kpi.hl .val { color: var(--accent); }
-
-  h2 { font-size: 18px; margin: 34px 0 12px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
-  thead th {
-    background: var(--head); color: #fff; font-weight: 600; font-size: 12.5px;
-    text-transform: uppercase; letter-spacing: .04em; position: sticky; top: 0;
-  }
-  tbody tr:nth-child(even) { background: #fafbfc; }
-  tbody tr:hover { background: var(--accent-soft); }
-  td.num, th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .bar { height: 7px; border-radius: 4px; background: var(--accent); display: inline-block; vertical-align: middle; }
-  tfoot td { font-weight: 700; background: #eef1f5; border-top: 2px solid var(--line); }
-  .team { font-weight: 600; }
-  .grp td { background: #f0f3f7; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--head); }
-  .note { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
-  ul.extras { list-style: none; padding: 0; margin: 0; }
-  ul.extras li { display: flex; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 14px; }
-  ul.extras li:last-child { border-bottom: 0; }
-  ul.extras li span:last-child { font-variant-numeric: tabular-nums; font-weight: 600; }
-  .foot { margin-top: 26px; color: var(--muted); font-size: 13px; }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <header>
-    <h1>Трудозатраты «Хаб 2.0 для Руб-Арх»</h1>
-    <p class="sub">План по командам и месяцам · версия файла 1.4</p>
-  </header>
-
-  <div class="meta">
-    <span class="chip">Период: <b>ноя 2026 — окт 2027</b></span>
-    <span class="chip">Ставка: <b>700 000 ₽ / чел-мес</b></span>
-    <span class="chip">Позиций команд: <b>14</b></span>
-    <span class="chip">Маркетинг: <b>не в расчёте</b></span>
-  </div>
-
-  <div class="kpis">
-    <div class="kpi hl">
-      <div class="lbl">Итого чел/мес</div>
-      <div class="val">78,95</div>
-      <div class="hint">сумма по всем командам</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Стоимость ставок</div>
-      <div class="val">55,27 млн ₽</div>
-      <div class="hint">78,95 × 700 000 ₽</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Доп. затраты</div>
-      <div class="val">7,5 млн ₽</div>
-      <div class="hint">NRE, пресс-формы, стенды, резерв</div>
-    </div>
-    <div class="kpi hl">
-      <div class="lbl">Тотал с доп. затратами</div>
-      <div class="val">63,27 млн ₽</div>
-      <div class="hint">55,27 + 7,5</div>
-    </div>
-  </div>
-
-  <h2>Трудозатраты по командам</h2>
-  <div class="card">
-    <table>
-      <thead>
-        <tr>
-          <th>Команда</th>
-          <th class="num">Q4&nbsp;26</th>
-          <th class="num">янв 27</th>
-          <th class="num">фев 27</th>
-          <th class="num">мар 27</th>
-          <th class="num">апр 27</th>
-          <th class="num">май 27</th>
-          <th class="num">июн 27</th>
-          <th class="num">июл 27</th>
-          <th class="num">авг 27</th>
-          <th class="num">сен 27</th>
-          <th class="num">окт 27</th>
-          <th class="num">Итого чел/мес</th>
-          <th class="num">Стоимость, ₽</th>
-          <th>Доля</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td class="team">kernel / moira team</td><td class="num">0</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">1,2</td><td class="num">1,2</td><td class="num">1,2</td><td class="num">19,00</td><td class="num">13 300 000</td><td><span class="bar" style="width:96px"></span></td></tr>
-        <tr><td class="team">Management</td><td class="num">2,9</td><td class="num">1,8</td><td class="num">1,8</td><td class="num">1,8</td><td class="num">1,9</td><td class="num">2,0</td><td class="num">2,1</td><td class="num">2,2</td><td class="num">2,35</td><td class="num">2,15</td><td class="num">1,5</td><td class="num">22,50</td><td class="num">15 750 000</td><td><span class="bar" style="width:100%"></span></td></tr>
-        <tr><td class="team">QA</td><td class="num">0</td><td class="num">0,2</td><td class="num">1,9</td><td class="num">1,9</td><td class="num">2,1</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">2,2</td><td class="num">1,8</td><td class="num">0,8</td><td class="num">0,4</td><td class="num">15,70</td><td class="num">10 990 000</td><td><span class="bar" style="width:78px"></span></td></tr>
-        <tr><td class="team">Salute / SHBE</td><td class="num">0,8</td><td class="num">0,0</td><td class="num">0,3</td><td class="num">1,9</td><td class="num">1,8</td><td class="num">1,9</td><td class="num">1,5</td><td class="num">1,5</td><td class="num">0,5</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">10,40</td><td class="num">7 280 000</td><td><span class="bar" style="width:52px"></span></td></tr>
-        <tr><td class="team">Package</td><td class="num">0</td><td class="num">0</td><td class="num">0,95</td><td class="num">0,7</td><td class="num">0,4</td><td class="num">0,25</td><td class="num">0,4</td><td class="num">0,4</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">3,10</td><td class="num">2 170 000</td><td><span class="bar" style="width:15px"></span></td></tr>
-        <tr><td class="team">Chamber (Телешов)</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0,1</td><td class="num">0,2</td><td class="num">0,7</td><td class="num">0,7</td><td class="num">0,7</td><td class="num">0,1</td><td class="num">0</td><td class="num">0</td><td class="num">2,50</td><td class="num">1 750 000</td><td><span class="bar" style="width:13px"></span></td></tr>
-        <tr><td class="team">Production</td><td class="num">0,1</td><td class="num">0,05</td><td class="num">0,05</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,3</td><td class="num">0,3</td><td class="num">0,45</td><td class="num">0,35</td><td class="num">0,15</td><td class="num">0</td><td class="num">2,00</td><td class="num">1 400 000</td><td><span class="bar" style="width:10px"></span></td></tr>
-        <tr><td class="team">Сорсинг</td><td class="num">0,9</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0,1</td><td class="num">0</td><td class="num">1,80</td><td class="num">1 260 000</td><td><span class="bar" style="width:9px"></span></td></tr>
-        <tr><td class="team">RnD</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0,1</td><td class="num">0,2</td><td class="num">0,3</td><td class="num">0,3</td><td class="num">0,2</td><td class="num">0,1</td><td class="num">0</td><td class="num">0</td><td class="num">1,20</td><td class="num">840 000</td><td><span class="bar" style="width:6px"></span></td></tr>
-        <tr><td class="team">Other</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0,25</td><td class="num">0,25</td><td class="num">0,25</td><td class="num">0</td><td class="num">0</td><td class="num">0,75</td><td class="num">525 000</td><td><span class="bar" style="width:4px"></span></td></tr>
-        <tr><td class="team">GTM Stream</td><td class="num" colspan="11">0</td><td class="num">0</td><td class="num">0</td><td></td></tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>Всего ставок</td>
-          <td class="num">4,70</td>
-          <td class="num">4,35</td>
-          <td class="num">6,35</td>
-          <td class="num">9,00</td>
-          <td class="num">9,20</td>
-          <td class="num">9,40</td>
-          <td class="num">9,65</td>
-          <td class="num">10,05</td>
-          <td class="num">7,85</td>
-          <td class="num">5,05</td>
-          <td class="num">3,35</td>
-          <td class="num">78,95</td>
-          <td class="num">55 265 000</td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-    <p class="note" style="padding:10px 14px">
-      Столбец Q4 26 — суммарно ноябрь + декабрь 2026 (1,95 + 2,75 чел/мес).
-      «GTM Stream» и «Marketing» вложены в отдельные строки, но по плану равны нулю.
-    </p>
-  </div>
-
-  <h2>Дополнительные затраты</h2>
-  <div class="card">
-    <ul class="extras">
-      <li><span>NRE</span><span>1 000 000 ₽</span></li>
-      <li><span>Пресс-формы</span><span>4 500 000 ₽</span></li>
-      <li><span>Стенды, образцы, командировки</span><span>1 500 000 ₽</span></li>
-      <li><span>Маркетинг (по необходимости)</span><span>0 ₽</span></li>
-      <li><span>Иное / резерв</span><span>1 000 000 ₽</span></li>
-      <li><span><b>Итого доп. затраты</b></span><span>7 500 000 ₽</span></li>
-    </ul>
-  </div>
-
-  <h2>Распределение по месяцам</h2>
-  <div class="card">
-    <table>
-      <thead>
-        <tr><th>Месяц</th><th class="num">Чел/мес</th><th class="num">Стоимость, ₽</th><th>Профиль нагрузки</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Ноябрь 2026</td><td class="num">1,95</td><td class="num">1 365 000</td><td><span class="bar" style="width:19px"></span></td></tr>
-        <tr><td>Декабрь 2026</td><td class="num">2,75</td><td class="num">1 925 000</td><td><span class="bar" style="width:27px"></span></td></tr>
-        <tr><td>Январь 2027</td><td class="num">4,35</td><td class="num">3 045 000</td><td><span class="bar" style="width:43px"></span></td></tr>
-        <tr><td>Февраль 2027</td><td class="num">6,35</td><td class="num">4 445 000</td><td><span class="bar" style="width:63px"></span></td></tr>
-        <tr><td>Март 2027</td><td class="num">9,00</td><td class="num">6 300 000</td><td><span class="bar" style="width:90px"></span></td></tr>
-        <tr><td>Апрель 2027</td><td class="num">9,20</td><td class="num">6 440 000</td><td><span class="bar" style="width:92px"></span></td></tr>
-        <tr><td>Май 2027</td><td class="num">9,40</td><td class="num">6 580 000</td><td><span class="bar" style="width:94px"></span></td></tr>
-        <tr><td>Июнь 2027</td><td class="num">9,65</td><td class="num">6 755 000</td><td><span class="bar" style="width:96px"></span></td></tr>
-        <tr><td>Июль 2027</td><td class="num">10,05</td><td class="num">7 035 000</td><td><span class="bar" style="width:100%"></span></td></tr>
-        <tr><td>Август 2027</td><td class="num">7,85</td><td class="num">5 495 000</td><td><span class="bar" style="width:78px"></span></td></tr>
-        <tr><td>Сентябрь 2027</td><td class="num">5,05</td><td class="num">3 535 000</td><td><span class="bar" style="width:50px"></span></td></tr>
-        <tr><td>Октябрь 2027</td><td class="num">3,35</td><td class="num">2 345 000</td><td><span class="bar" style="width:33px"></span></td></tr>
-      </tbody>
-      <tfoot>
-        <tr><td>Итого</td><td class="num">78,95</td><td class="num">55 265 000</td><td></td></tr>
-      </tfoot>
-    </table>
-  </div>
-
-  <div class="foot">
-    Источник: «Трудозатраты Хаб 2.0 для РубАрх_ver.1.4.xlsx».
-    Тотал с дополнительными затратами — 63 265 000 ₽.
-  </div>
-
-</div>
-</body>
+});
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Интерактивная панель управления портфелем проектов Sber Devices: статусы проектов, загрузка ресурсов, реестр рисков и план митигации."
+    />
+    <title>Портфель проектов · панель управления</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/index-CR3W-R66.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CgPA5v5t.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="root"></div>
+    <script src="/data.js"></script>
+    <script src="/app.js"></script>
+    <script src="/mode-project.js"></script>
+    <script src="/mode-resources.js"></script>
+    <script src="/mode-risks.js"></script>
+  </body>
 </html>
