@@ -1,5 +1,4 @@
-[Хаб2.0_РубАрх_ресурсы_и_бюджет.html](https://github.com/user-attachments/files/33966578/2.0_._._._.html)
-<!DOCTYPE html>
+
 <html lang="ru">
 <head>
 <meta charset="utf-8">
