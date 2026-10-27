@@ -2,7 +2,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Трудозатраты Хаб 2.0 для РубАрх — ресурсы и бюджет</title>
 <style>
 :root{
   --bg:#eef6fb; --panel:#ffffff; --ink:#12303f; --muted:#5b7788;
@@ -82,8 +81,8 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;text-align:center}
 <div class="wrap">
 <header class="top">
   <h1>Трудозатраты Хаб 2.0 для РубАрх — ресурсная модель и бюджет</h1>
-  <div class="sub">Термостат RS485 · версия документа 1.4 · горизонт планирования: ноябрь 2026 — октябрь 2027</div>
-  <div class="meta">Источник: файл «Трудозатраты Хаб 2.0 для РубАрх_ver.1.4.xlsx», лист «Термостат RS485». Все суммы — в рублях, ставка 700 000 руб./чел-мес. Блоки, отмеченные <span class="badge gen">сгенерировано ИИ</span>, построены по результатам анализа данных файла.</div>
+  <div class="sub">Версия документа 1.4 · горизонт планирования: ноябрь 2026 — октябрь 2027</div>
+  <div class="meta">Источник: файл «Трудозатраты Хаб 2.0 для РубАрх_ver.1.4.xlsx». Все суммы — в рублях, ставка 700 000 руб./чел-мес. Блоки, отмеченные <span class="badge gen">сгенерировано ИИ</span>, построены по результатам анализа данных файла.</div>
 </header>
 
 <div class="switch" role="tablist">
