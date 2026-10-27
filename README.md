@@ -1,9 +1,8 @@
-
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Хаб 2.0 для РубАрх — ресурсы и бюджет</title>
+<title>Трудозатраты Хаб 2.0 для РубАрх — ресурсы и бюджет</title>
 <style>
 :root{
   --bg:#eef6fb; --panel:#ffffff; --ink:#12303f; --muted:#5b7788;
@@ -35,52 +34,56 @@ h3{font-size:14.5px;margin:0 0 10px;color:#1c5f81}
 .hint{font-size:12.5px;color:var(--muted);margin:-4px 0 12px}
 select{font:inherit;padding:10px 12px;border:1px solid var(--line2);border-radius:9px;background:#fff;color:var(--ink);min-width:290px}
 select:focus{outline:2px solid var(--acc2);outline-offset:1px}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{background:var(--soft);font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:#3d6479;position:sticky;top:0}
+label.fld{display:block;font-weight:600;color:#1c5f81;margin-bottom:7px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--soft);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;color:#3d6479;position:sticky;top:0;z-index:2}
 td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.l,th.l{white-space:normal;min-width:200px}
 tbody tr:hover{background:#f7fbfe}
+tr.grp{background:var(--soft);font-weight:700}
+tr.grp td{color:#12587d}
+tr.totalrow{background:#e8f4fb;font-weight:700}
+tr.totalrow td{color:#0f4f70;border-top:2px solid var(--line2)}
 tfoot td{font-weight:700;background:var(--soft);border-top:2px solid var(--line2)}
-.tblwrap{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+.tblwrap{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:10px}
 .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;background:#eaf5fc;color:#1b7fb8;border:1px solid #cfe7f5}
-.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-bottom:18px}
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-bottom:6px}
 .bcard{background:linear-gradient(180deg,#fbfdff,#eef7fc);border:1px solid var(--line);border-radius:11px;padding:14px 15px}
 .bcard .lbl{font-size:12.5px;color:var(--muted);min-height:32px}
 .bcard .val{font-size:19px;font-weight:700;color:#12587d;margin-top:4px;font-variant-numeric:tabular-nums}
 .bcard .pct{font-size:12px;color:var(--muted);margin-top:3px}
 .bcard.big .val{font-size:22px}
 .bwrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 8px;overflow:auto}
-svg .bar{fill:url(#gr);transition:.15s}
+svg .bar{fill:url(#gr);transition:.15s;cursor:pointer}
 svg .bar:hover{fill:#12587d}
 svg .gline{stroke:var(--line);stroke-width:1;stroke-dasharray:3 4}
 svg .glab{font-size:11px;fill:var(--muted)}
-svg .bmon{font-size:11.5px;fill:#547082}
-svg .bval{font-size:12.5px;fill:#0f4f70;font-weight:700}
+svg .bmon{font-size:11px;fill:#547082}
+svg .bval{font-size:11.5px;fill:#0f4f70;font-weight:700}
 ul{margin:6px 0 0;padding-left:18px}
 li{margin-bottom:5px}
-.callout{border-left:3px solid var(--acc);background:var(--soft);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:10px;font-size:13.5px}
+.callout{border-left:3px solid var(--acc);background:var(--soft);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;font-size:13.5px}
 .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
   background:#e8f4fb;color:#17729f;border:1px solid #c8e3f2;border-radius:5px;padding:2px 7px;margin-left:8px;vertical-align:middle}
-.badge.hi{background:#fdeeee;color:#a33;border-color:#f3cfcf}
-.badge.mid{background:#fdf6e7;color:#8a6209;border-color:#f0e0bb}
-.badge.ok{background:#eaf7f0;color:#1c7a52;border-color:#c9e8d8}
+.badge.gen{background:#eaf7f0;color:#1c7a52;border-color:#c9e8d8}
 .concl{border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin-bottom:12px;background:#fff}
 .concl.p{border-color:#f3d3d3;background:#fef8f8}
 .concl.r{border-color:#f0e0bb;background:#fffdf6}
 .concl.s{border-color:#c9e8d8;background:#f6fdf9}
 .concl h4{margin:0 0 8px;font-size:14px;display:flex;align-items:center;gap:8px}
+.risktag{font-weight:700;color:var(--risk)}
 footer{margin-top:26px;color:var(--muted);font-size:12.5px;text-align:center}
 .tooltip{position:fixed;pointer-events:none;background:#0f3c54;color:#fff;font-size:12px;padding:5px 9px;border-radius:6px;opacity:0;transition:.12s;z-index:9}
-.empty{padding:18px;color:var(--muted);font-size:13.5px}
-@media(max-width:720px){.wrap{padding:16px 12px 48px}h1{font-size:19px}select{min-width:0;width:100%}.tblwrap{max-height:none}}
+@media(max-width:720px){.wrap{padding:16px 12px 48px}h1{font-size:19px}select{min-width:0;width:100%}.switch{flex-direction:column;width:100%}.switch button{width:100%}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top">
-  <h1>Хаб 2.0 для РубАрх — ресурсная модель и бюджет</h1>
-  <div class="sub">Термостат RS485 · версия документа 1.3 · горизонт планирования: окт 2026 — сен 2027</div>
-  <div class="meta">Источник: файл «Трудозатраты Хаб 2.0 для РубАрх_ver.1.3.xlsx», лист «Термостат RS485». Все суммы — в рублях. Блоки, отмеченные <span class="badge">данные от ИИ</span>, сгенерированы по результатам анализа данных файла.</div>
+  <h1>Трудозатраты Хаб 2.0 для РубАрх — ресурсная модель и бюджет</h1>
+  <div class="sub">Термостат RS485 · версия документа 1.4 · горизонт планирования: ноябрь 2026 — октябрь 2027</div>
+  <div class="meta">Источник: файл «Трудозатраты Хаб 2.0 для РубАрх_ver.1.4.xlsx», лист «Термостат RS485». Все суммы — в рублях, ставка 700 000 руб./чел-мес. Блоки, отмеченные <span class="badge gen">сгенерировано ИИ</span>, построены по результатам анализа данных файла.</div>
 </header>
 
 <div class="switch" role="tablist">
@@ -92,52 +95,60 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;text-align:center}
 <section class="mode on" id="mRes">
   <div class="card">
     <h2>Фильтр по ресурсу</h2>
-    <div class="hint">Выберите ресурс, чтобы отфильтровать таблицу трудозатрат. Значение «Все ресурсы» показывает полный состав.</div>
-    <label for="resSel" class="hint">Ресурс</label><br>
-    <select id="resSel" onchange="filterRes()">
-      <option value="">Все ресурсы</option>
+    <div class="hint">Выберите ресурс, чтобы отфильтровать таблицу трудозатрат и гистограмму ниже. Значение «Все ресурсы» показывает полный состав.</div>
+    <label for="resSel" class="fld">Ресурс / направление</label>
+    <select id="resSel" onchange="applyFilter()">
+      <option value="__all__">Все ресурсы</option>
     </select>
     <div class="callout" id="resInfo">Показаны все ресурсы проекта.</div>
   </div>
 
   <div class="card">
     <h2>Таблица ресурсов</h2>
-    <div class="hint">Профили команды, загрузка в человеко-месяцах (чел/мес) и стоимость по документу. Ставка: ПАО — 700 000 руб./чел-мес, ДЗО — 1 000 000 руб./чел-мес (по данным файла).</div>
+    <div class="hint" id="tblHint">Профили команды, загрузка в человеко-месяцах (чел/мес) и стоимость по документу. Ставка: ПАО — 700 000 руб./чел-мес, ДЗО — 1 000 000 руб./чел-мес (по данным файла).</div>
     <div class="tblwrap">
       <table id="resTbl">
         <thead><tr>
           <th>Профиль / роль</th><th>Направление</th><th>В штате</th>
           <th class="num">Чел/мес</th><th class="num">Ставка, руб.</th><th class="num">Стоимость, руб.</th>
         </tr></thead>
-        <tbody></tbody>
+        <tbody id="resBody"></tbody>
         <tfoot><tr><td colspan="3">Итого по показанным</td><td class="num" id="fQ">—</td><td></td><td class="num" id="fC">—</td></tr></tfoot>
       </table>
     </div>
   </div>
 
   <div class="card">
-    <h2>Основные выводы по распределению ресурсов <span class="badge hi">данные от ИИ</span></h2>
+    <h2>Гистограмма загрузки по месяцам</h2>
+    <div class="hint" id="chartTitle">Ось X — месяц, ось Y — человеко-месяцы (чел/мес). Наведите курсор на столбец для точного значения.</div>
+    <div class="bwrap" id="resChart"></div>
+  </div>
+
+  <div class="card">
+    <h2>Выводы по распределению ресурсов <span class="badge gen">сгенерировано ИИ</span></h2>
     <div class="concl p">
       <h4>Проблемы</h4>
       <ul>
-        <li>Совокупная потребность <b>76.7 чел/мес</b> при пиковой одновременной загрузке до <b>10.0 условных ставок</b> в месяц — ресурс распределён неравномерно.</li>
-        <li>Две трети объёма сосредоточены в трёх направлениях: Management, Ядро/Moira и QA — остальные 6 направлений вместе дают менее трети трудозатрат.</li>
-        <li>Значительная часть профилей помечена как «не в штате» (GTM, Marketing, PR, Редакция, Go scenarios, GO Agent WB и др.) — их трудозатраты в файле не оценены.</li>
+        <li>Пиковая загрузка приходится на июль—сентябрь 2027 (10,05; 7,85; 5,05 чел/мес в сводной строке) — ресурсы сжимаются в узкое окно второй половины проекта.</li>
+        <li>Резкий спад после сентября 2027: с 7,85 до 3,35 чел/мес за два месяца — требуется аккуратное высвобождение команд и передача задач.</li>
+        <li>Ряды без числовых значений по месяцам (GTM, Marketing, Dig.designer, PR, Редакция, PM Salute, Kotlin back, StarOS App, B2B Present PM/Go) в расчёт не включены; маркетинг в файле помечен как «не включён в расчёт».</li>
       </ul>
     </div>
     <div class="concl r">
       <h4>Риски</h4>
       <ul>
-        <li>Пик загрузки приходится на январь—июнь 2027 — риск конкуренции за одни и те же роли (TPM, QA, дизайн) в смежных проектах.</li>
-        <li>Ключевые компетенции завязаны на узкие команды (ядро/Moira, Salute/SHBE, Chamber) — выпадение одной команды критично.</li>
-        <li>Доля управления (Management ~27% ФОТ) высока относительно исполнительских направлений.</li>
+        <li><span class="risktag">Концентрация экспертизы:</span> крупнейшие группы — Management (22,5 чел/мес) и kernel/moira team (19,0 чел/мес) — формируют более половины объёма; выпадение ключевого участника бьёт по критическому пути.</li>
+        <li><span class="risktag">Пиковые месяцы:</span> одновременная загрузка kernel/moira, QA, Package и Salute в июле—августе 2027 создаёт дефицит профильных специалистов.</li>
+        <li><span class="risktag">Поздний старт:</span> производственные и логистические роли выходят на проект только в июле—октябре 2027, сжимая окно подготовки образцов и валидации.</li>
+        <li><span class="risktag">Низкая автотестовая нагрузка:</span> HW/FW QA авт. тест идёт только февраль—июль 2027 и обрывается, тогда как ручной тест продолжается — риск ручного регресса в конце проекта.</li>
       </ul>
     </div>
     <div class="concl s">
       <h4>Сходимость</h4>
       <ul>
-        <li>Расчётные трудозатраты из таблицы сходятся с итогом файла: строки «Total ставки» (76,75 чел/мес) и стоимость ФОТ <b>56 875 000 руб.</b>.</li>
-        <li>Разбивка по направлениям и по месяцам взаимно согласована — сумма месячных затрат равна годовому ФОТ.</li>
+        <li>Сумма по месяцам сводной строки составляет 78,95 чел/мес и в точности совпадает с итогом файла — расхождения между помесячной разбивкой и итогом нет.</li>
+        <li>Итог по ресурсам (78,95 чел/мес) за вычетом строк kernel/moira (19,0) и Management (22,5) показывает, что исполнительские команды суммарно сопоставимы с управленческим блоком.</li>
+        <li>Профиль загрузки описывает классическую кривую разработки: разгон ноябрь 2026 — апрель 2027, плато, пик середины проекта, спад к октябрю 2027.</li>
       </ul>
     </div>
   </div>
@@ -147,95 +158,197 @@ footer{margin-top:26px;color:var(--muted);font-size:12.5px;text-align:center}
 <section class="mode" id="mBud">
   <div class="card">
     <h2>Общие затраты по категориям</h2>
-    <div class="hint">Структура бюджета проекта по данным файла. ФОТ рассчитан умножением трудозатрат на ставку соответствующего контура.</div>
+    <div class="hint">Структура бюджета по данным файла. ФОТ рассчитан умножением трудозатрат на ставку 700 000 руб./чел-мес.</div>
     <div class="bars">
-      <div class="bcard big"><div class="lbl">ФОТ (оплата труда)</div><div class="val">56 875 000 руб.</div><div class="pct">94% всех затрат</div></div>
-      <div class="bcard"><div class="lbl">NRE</div><div class="val">1 000 000 руб.</div><div class="pct">разовые инженерные затраты</div></div>
-      <div class="bcard"><div class="lbl">Стенды, образцы, командировки</div><div class="val">1 500 000 руб.</div><div class="pct">инфраструктура и образцы</div></div>
-      <div class="bcard"><div class="lbl">Материалы (пресс-формы)</div><div class="val">0 руб.</div><div class="pct">по данным файла</div></div>
-      <div class="bcard"><div class="lbl">Иное / резерв</div><div class="val">1 000 000 руб.</div><div class="pct">резерв проекта</div></div>
-      <div class="bcard"><div class="lbl">Маркетинг</div><div class="val">0 руб.</div><div class="pct">не включён в расчёт</div></div>
-      <div class="bcard big"><div class="lbl">ИТОГО по проекту</div><div class="val">60 375 000 руб.</div><div class="pct">с учётом доп. затрат 3 500 000 руб.</div></div>
+      <div class="bcard big"><div class="lbl">ФОТ (оплата труда)</div><div class="val">55 265 000 руб.</div><div class="pct">трудозатраты × ставка</div></div>
+      <div class="bcard big"><div class="lbl">ИТОГО по проекту</div><div class="val">63 265 000 руб.</div><div class="pct">строка «ТОТАЛ» файла</div></div>
+    </div>
+    <div class="bars" style="margin-top:12px">
+      <div class="bcard"><div class="lbl">NRE</div><div class="val">1 000 000 руб.</div><div class="pct">по данным файла</div></div>
+      <div class="bcard"><div class="lbl">Пресс-формы</div><div class="val">4 500 000 руб.</div><div class="pct">по данным файла</div></div>
+      <div class="bcard"><div class="lbl">Стенды, образцы, командировки</div><div class="val">1 500 000 руб.</div><div class="pct">по данным файла</div></div>
+      <div class="bcard"><div class="lbl">Иное / резерв</div><div class="val">1 000 000 руб.</div><div class="pct">по данным файла</div></div>
+    </div>
+    <div class="bars" style="margin-top:12px">
+      <div class="bcard"><div class="lbl">Доп. затраты (всего)</div><div class="val">8 000 000 руб.</div><div class="pct">12,6% от итога</div></div>
+      <div class="bcard"><div class="lbl">Трудозатраты</div><div class="val">78,95 чел/мес</div><div class="pct">итог файла по месяцам</div></div>
     </div>
   </div>
 
   <div class="card">
     <h2>Помесячные затраты</h2>
-    <div class="hint">Ось X — время, ось Y — стоимость (млн руб.). Значения рассчитаны по загрузке профилей и их ставкам; максимум — 7 030 000 руб. в 05.2027.</div>
-    <div class="bwrap">
-      <svg viewBox="0 0 880 340" width="100%" height="340" role="img" aria-label="График помесячных затрат">
-        <defs><linearGradient id="gr" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#4fb4e0"/><stop offset="1" stop-color="#1b7fb8"/></linearGradient></defs>
-        <line class="gline" x1="70" y1="294.0" x2="860" y2="294.0"/><text class="glab" x="62" y="298.0" text-anchor="end">0.0 млн</text><line class="gline" x1="70" y1="225.5" x2="860" y2="225.5"/><text class="glab" x="62" y="229.5" text-anchor="end">1.8 млн</text><line class="gline" x1="70" y1="157.0" x2="860" y2="157.0"/><text class="glab" x="62" y="161.0" text-anchor="end">3.5 млн</text><line class="gline" x1="70" y1="88.5" x2="860" y2="88.5"/><text class="glab" x="62" y="92.5" text-anchor="end">5.3 млн</text><line class="gline" x1="70" y1="20.0" x2="860" y2="20.0"/><text class="glab" x="62" y="24.0" text-anchor="end">7.0 млн</text>
-        <line x1="70" y1="294" x2="860" y2="294" stroke="#bcd8e8"/>
-        <rect class="bar" x="82.5" y="248.4" width="40.8" height="45.6" rx="3" data-full="1 170 000" data-m="10.2026"></rect><text class="bval" x="102.9" y="242.4" text-anchor="middle">1170т</text><text class="bmon" x="102.9" y="310" text-anchor="middle">окт 26</text><rect class="bar" x="148.3" y="212.9" width="40.8" height="81.1" rx="3" data-full="2 080 000" data-m="11.2026"></rect><text class="bval" x="168.8" y="206.9" text-anchor="middle">2080т</text><text class="bmon" x="168.8" y="310" text-anchor="middle">ноя 26</text><rect class="bar" x="214.2" y="168.5" width="40.8" height="125.5" rx="3" data-full="3 220 000" data-m="12.2026"></rect><text class="bval" x="234.6" y="162.5" text-anchor="middle">3220т</text><text class="bmon" x="234.6" y="310" text-anchor="middle">дек 26</text><rect class="bar" x="280.0" y="92.7" width="40.8" height="201.3" rx="3" data-full="5 165 000" data-m="01.2027"></rect><text class="bval" x="300.4" y="86.7" text-anchor="middle">5165т</text><text class="bmon" x="300.4" y="310" text-anchor="middle">янв 27</text><rect class="bar" x="345.8" y="26.6" width="40.8" height="267.4" rx="3" data-full="6 860 000" data-m="02.2027"></rect><text class="bval" x="366.2" y="20.6" text-anchor="middle">6860т</text><text class="bmon" x="366.2" y="310" text-anchor="middle">фев 27</text><rect class="bar" x="411.7" y="23.9" width="40.8" height="270.1" rx="3" data-full="6 930 000" data-m="03.2027"></rect><text class="bval" x="432.1" y="17.9" text-anchor="middle">6930т</text><text class="bmon" x="432.1" y="310" text-anchor="middle">мар 27</text><rect class="bar" x="477.5" y="30.3" width="40.8" height="263.7" rx="3" data-full="6 765 000" data-m="04.2027"></rect><text class="bval" x="497.9" y="24.3" text-anchor="middle">6765т</text><text class="bmon" x="497.9" y="310" text-anchor="middle">апр 27</text><rect class="bar" x="543.3" y="20.0" width="40.8" height="274.0" rx="3" data-full="7 030 000" data-m="05.2027"></rect><text class="bval" x="563.8" y="14.0" text-anchor="middle">7030т</text><text class="bmon" x="563.8" y="310" text-anchor="middle">май 27</text><rect class="bar" x="609.2" y="25.5" width="40.8" height="268.5" rx="3" data-full="6 890 000" data-m="06.2027"></rect><text class="bval" x="629.6" y="19.5" text-anchor="middle">6890т</text><text class="bmon" x="629.6" y="310" text-anchor="middle">июн 27</text><rect class="bar" x="675.0" y="105.9" width="40.8" height="188.1" rx="3" data-full="4 825 000" data-m="07.2027"></rect><text class="bval" x="695.4" y="99.9" text-anchor="middle">4825т</text><text class="bmon" x="695.4" y="310" text-anchor="middle">июл 27</text><rect class="bar" x="740.8" y="155.1" width="40.8" height="138.9" rx="3" data-full="3 565 000" data-m="08.2027"></rect><text class="bval" x="761.2" y="149.1" text-anchor="middle">3565т</text><text class="bmon" x="761.2" y="310" text-anchor="middle">авг 27</text><rect class="bar" x="806.7" y="201.4" width="40.8" height="92.6" rx="3" data-full="2 375 000" data-m="09.2027"></rect><text class="bval" x="827.1" y="195.4" text-anchor="middle">2375т</text><text class="bmon" x="827.1" y="310" text-anchor="middle">сен 27</text>
-      </svg>
-    </div>
+    <div class="hint">Ось X — время, ось Y — стоимость (млн руб.). Значения рассчитаны по загрузке и ставке файла; максимум — 7 035 000 руб. в июле 2027.</div>
+    <div class="bwrap" id="budChart"></div>
   </div>
 
   <div class="card">
-    <h2>Основные выводы по бюджету и затратам <span class="badge hi">данные от ИИ</span></h2>
+    <h2>Выводы по бюджету и затратам <span class="badge gen">сгенерировано ИИ</span></h2>
+    <div class="concl p">
+      <h4>Структура затрат</h4>
+      <ul>
+        <li>ФОТ (55 265 000 руб.) формирует основную часть бюджета, доп. затраты (8 000 000 руб.) — около 13% от итоговых 63 265 000 руб.</li>
+        <li>Крупнейшая статья доп. затрат — пресс-формы (4 500 000 руб.), далее NRE и стенды/образцы/командировки — 1 000 000 и 1 500 000 руб.</li>
+        <li>Статья «Иное / резерв» (1 000 000 руб.) заложена на непредвиденные расходы; маркетинг в расчёт не включён (0 руб.).</li>
+      </ul>
+    </div>
     <div class="concl r">
       <h4>Риски</h4>
       <ul>
-        <li>ФОТ занимает 94% бюджета — проект крайне чувствителен к ставкам и численности персонала.</li>
-        <li>Затраты резко растут с декабря 2026 по февраль 2027 (пик 7 030 000 руб.) — кассовый разрыв при равномерном финансировании.</li>
-        <li>Доп. затраты (3 500 000 руб.) не разнесены по месяцам — фактический профиль платежей может смещаться.</li>
+        <li><span class="risktag">Пиковая стоимость:</span> максимум затрат приходится на месяцы максимальной загрузки — перенос сроков середины проекта сразу повышает стоимость.</li>
+        <li><span class="risktag">Доп. затраты с фиксированной суммой:</span> пресс-формы и NRE не масштабируются вместе с ФОТ и являются отдельным бюджетным риском при сдвиге сроков.</li>
+        <li><span class="risktag">Резерв 1 000 000 руб.</span> покрывает лишь небольшую долю проекта — при существенном смещении графика может быть израсходован досрочно.</li>
       </ul>
     </div>
     <div class="concl s">
-      <h4>Сходимость и резервы</h4>
+      <h4>Сходимость</h4>
       <ul>
-        <li>Сумма месячных затрат равна годовому ФОТ 56 875 000 руб.; вместе с доп. затратами итог совпадает со строкой «ТОТАЛ» файла — 60 375 000 руб..</li>
-        <li>Резерв «Иное / резерв» и NRE (2 000 000 руб.) формируют буфер на непредвиденные работы.</li>
-      </ul>
-    </div>
-    <div class="concl p">
-      <h4>Проблемы</h4>
-      <ul>
-        <li>Около 60% затрат приходится на 5 месяцев пика — требуется синхронизация с sourcing и производством.</li>
-        <li>Затраты на материалы и маркетинг в документе равны нулю — при уточнении объёмов бюджет вырастет.</li>
+        <li>Сумма помесячных затрат в точности равна ФОТ из файла — 55 265 000 руб.; расчёт сходится с источником.</li>
+        <li>ФОТ + доп. затраты = 63 265 000 руб., что совпадает со значением «ТОТАЛ» в документе.</li>
+        <li>Ставка 700 000 руб. за человеко-месяц применяется единообразно ко всем ресурсам.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<footer>Документ сгенерирован из xlsx-источника · суммы в рублях · блоки «данные от ИИ» построены на основе анализа файла</footer>
+<footer>Собрано из xlsx-источника · суммы в рублях · блоки «сгенерировано ИИ» построены на основе анализа файла</footer>
 </div>
 <div class="tooltip" id="tip"></div>
 <script>
-const ROWS=[{"n": "Lead  / System analist (Шапкин)", "c": "Ядро / Moira team", "s": "да", "q": "2.0", "r": "700 000", "cost": "1 400 000"}, {"n": "Connectivity Team (команда Шапкина)", "c": "Ядро / Moira team", "s": "да", "q": "17.0", "r": "700 000", "cost": "11 900 000"}, {"n": "HW/FW QA (мануал тест)", "c": "QA", "s": "да", "q": "7.6", "r": "700 000", "cost": "5 320 000"}, {"n": "HW/FW QA автом. тест (грубо)", "c": "QA", "s": "да", "q": "2.4", "r": "700 000", "cost": "1 680 000"}, {"n": "SW QA", "c": "QA", "s": "да", "q": "1.7", "r": "700 000", "cost": "1 190 000"}, {"n": "SZ engineers team", "c": "QA", "s": "да", "q": "4.0", "r": "700 000", "cost": "2 800 000"}, {"n": "Сорсинг manager", "c": "Сорсинг", "s": "да", "q": "1.7", "r": "700 000", "cost": "1 190 000"}, {"n": "Production manager", "c": "Production", "s": "да", "q": "1.8", "r": "700 000", "cost": "1 260 000"}, {"n": "Logistic", "c": "Production", "s": "да", "q": "0.1", "r": "700 000", "cost": "105 000"}, {"n": "Tech writer", "c": "Other", "s": "да", "q": "0.5", "r": "700 000", "cost": "350 000"}, {"n": "Constructive designer", "c": "Package", "s": "да", "q": "0.8", "r": "700 000", "cost": "525 000"}, {"n": "Digital designer", "c": "Package", "s": "да", "q": "1.1", "r": "700 000", "cost": "770 000"}, {"n": "Package tech writer", "c": "Package", "s": "да", "q": "0.8", "r": "700 000", "cost": "595 000"}, {"n": "Product Owner", "c": "Management", "s": "да", "q": "3.5", "r": "700 000", "cost": "2 450 000"}, {"n": "LPM", "c": "Management", "s": "да", "q": "4.2", "r": "700 000", "cost": "2 940 000"}, {"n": "SW TPM", "c": "Management", "s": "да", "q": "4.5", "r": "700 000", "cost": "3 150 000"}, {"n": "HW TPM", "c": "Management", "s": "да", "q": "5.1", "r": "700 000", "cost": "3 570 000"}, {"n": "SZ team (Midas + Elling)", "c": "Management", "s": "да", "q": "4.9", "r": "700 000", "cost": "3 430 000"}, {"n": "PO Salute", "c": "Salute / SHBE", "s": "да", "q": "0.9", "r": "1 000 000", "cost": "900 000"}, {"n": "System Analyst", "c": "Salute / SHBE", "s": "да", "q": "0.3", "r": "1 000 000", "cost": "300 000"}, {"n": "Android", "c": "Salute / SHBE", "s": "да", "q": "0.5", "r": "1 000 000", "cost": "500 000"}, {"n": "iOS", "c": "Salute / SHBE", "s": "да", "q": "0.5", "r": "1 000 000", "cost": "500 000"}, {"n": "Frontend", "c": "Salute / SHBE", "s": "да", "q": "1.5", "r": "1 000 000", "cost": "1 500 000"}, {"n": "Go scenarios", "c": "Salute / SHBE", "s": "—", "q": "2.1", "r": "1 000 000", "cost": "2 100 000"}, {"n": "Designer", "c": "Salute / SHBE", "s": "да", "q": "0.3", "r": "1 000 000", "cost": "300 000"}, {"n": "Go Core", "c": "Salute / SHBE", "s": "да", "q": "2.3", "r": "1 000 000", "cost": "2 300 000"}, {"n": "GO Agent WB", "c": "Salute / SHBE", "s": "—", "q": "2.1", "r": "1 000 000", "cost": "2 100 000"}, {"n": "Chamber specialist", "c": "Chamber", "s": "—", "q": "1.9", "r": "700 000", "cost": "1 330 000"}, {"n": "Chamber HW TPM", "c": "Chamber", "s": "—", "q": "0.6", "r": "700 000", "cost": "420 000"}];
-const CRE={"Ядро / Moira team": 13300000.0, "QA": 10990000.0, "Сорсинг": 1190000.0, "Production": 1365000.0, "Other": 350000.0, "Package": 1890000.0, "Management": 15540000.0, "Salute / SHBE": 10500000.0, "Chamber": 1750000.0};
-const sel=document.getElementById('resSel');
-ROWS.forEach(r=>{const o=document.createElement('option');o.value=r.n;o.textContent=r.n;sel.appendChild(o);});
-const tb=document.querySelector('#resTbl tbody');
-function fmS(s){return s;}
-function render(list){
-  tb.innerHTML=list.map(r=>`<tr><td>${r.n}</td><td><span class="pill">${r.c}</span></td><td>${r.s}</td>
-    <td class="num">${r.q}</td><td class="num">${r.r}</td><td class="num">${r.cost}</td></tr>`).join('');
-  let q=0,c=0;list.forEach(r=>{q+=parseFloat(r.q);c+=parseFloat(String(r.cost).replace(/ /g,''));});
-  document.getElementById('fQ').textContent=q.toFixed(1).replace('.',',');
-  document.getElementById('fC').textContent=Math.round(c).toLocaleString('ru-RU');
+const D={"months":["Ноя 2026","Дек 2026","Янв 2027","Фев 2027","Мар 2027","Апр 2027","Май 2027","Июн 2027","Июл 2027","Авг 2027","Сен 2027","Окт 2027"],"rows":[{"name":"kernel/moira team","group":null,"m":[0.0,0.0,2.2,2.2,2.2,2.2,2.2,2.2,2.2,1.2,1.2,1.2],"total":19.0},{"name":"Lead / System analist (Шапкин)","group":"kernel/moira team","m":[0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2],"total":2.0},{"name":"Connectivity Team (команда Шапкина)","group":"kernel/moira team","m":[0.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,1.0,1.0,1.0],"total":17.0},{"name":"QA","group":null,"m":[0.0,0.0,0.2,1.9,1.9,2.1,2.2,2.2,2.2,1.8,0.8,0.4],"total":15.7},{"name":"HW/FW QA (мануал тест)","group":"QA","m":[0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.3,0.3],"total":7.6},{"name":"HW/FW QA автом. тест (грубо)","group":"QA","m":[0.0,0.0,0.0,0.4,0.4,0.4,0.4,0.4,0.4,0.0,0.0,0.0],"total":2.4},{"name":"SW QA","group":"QA","m":[0.0,0.0,0.0,0.0,0.0,0.2,0.3,0.3,0.3,0.3,0.3,0.0],"total":1.7},{"name":"SZ engineers team","group":null,"m":[0.0,0.0,0.2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.2,0.1],"total":4.0},{"name":"Сорсинг","group":null,"m":[0.5,0.4,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.0],"total":1.8},{"name":"Сорсинг manager","group":"Сорсинг","m":[0.5,0.4,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.0],"total":1.8},{"name":"Production","group":null,"m":[0.05,0.05,0.05,0.05,0.05,0.1,0.1,0.3,0.3,0.45,0.35,0.15],"total":2.0},{"name":"Production manager","group":"Production","m":[0.05,0.05,0.05,0.05,0.05,0.1,0.1,0.3,0.3,0.4,0.3,0.1],"total":1.85},{"name":"Logistic","group":"Production","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.05,0.05,0.05],"total":0.15},{"name":"Other","group":null,"m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.25,0.25,0.25,0.0],"total":0.75},{"name":"Tech writer","group":"Other","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.25,0.25,0.25,0.0],"total":0.75},{"name":"Package","group":null,"m":[0.0,0.0,0.0,0.0,0.95,0.7,0.4,0.25,0.4,0.4,0.0,0.0],"total":3.1},{"name":"Constructive designer","group":"Package","m":[0.0,0.0,0.0,0.0,0.3,0.2,0.05,0.1,0.1,0.1,0.0,0.0],"total":0.85},{"name":"Digital designer","group":"Package","m":[0.0,0.0,0.0,0.0,0.15,0.4,0.25,0.1,0.2,0.2,0.0,0.0],"total":1.3},{"name":"Package tech writer","group":"Package","m":[0.0,0.0,0.0,0.0,0.5,0.1,0.1,0.05,0.1,0.1,0.0,0.0],"total":0.95},{"name":"Management","group":null,"m":[1.0,1.9,1.8,1.8,1.8,1.9,2.0,2.1,2.2,2.35,2.15,1.5],"total":22.5},{"name":"Product Owner","group":"Management","m":[0.5,0.5,0.4,0.2,0.2,0.2,0.2,0.2,0.2,0.35,0.35,0.2],"total":3.5},{"name":"LPM","group":"Management","m":[0.3,0.5,0.4,0.3,0.3,0.3,0.4,0.4,0.4,0.5,0.5,0.1],"total":4.4},{"name":"SW TPM","group":"Management","m":[0.1,0.2,0.3,0.3,0.3,0.4,0.4,0.5,0.6,0.5,0.5,0.5],"total":4.6},{"name":"HW TPM","group":"Management","m":[0.1,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.3,0.2],"total":5.1},{"name":"GTM","group":"Management","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"SZ team (Midas + Elling)","group":"Management","m":[0.0,0.2,0.2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5],"total":4.9},{"name":"GTM Stream","group":null,"m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"Marketing","group":"GTM Stream","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"Dig.designer","group":"GTM Stream","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"PR","group":"GTM Stream","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"Редакция","group":"GTM Stream","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","group":null,"m":[0.4,0.4,0.0,0.3,1.9,1.8,1.9,1.5,1.5,0.5,0.1,0.1],"total":10.4},{"name":"PO Salute","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.1,0.2,0.1,0.1,0.1,0.1,0.1,0.1,0.1],"total":1.0},{"name":"PM Salute","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"System Analyst","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.1,0.1,0.1,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.3},{"name":"Android","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.1,0.1,0.1,0.1,0.1,0.1,0.0,0.0],"total":0.6},{"name":"iOS","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.1,0.1,0.1,0.1,0.1,0.1,0.0,0.0],"total":0.6},{"name":"Kotlin back","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"Frontend","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.3,0.3,0.3,0.3,0.3,0.1,0.0,0.0],"total":1.6},{"name":"Go scenarios","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.5,0.5,0.5,0.3,0.3,0.0,0.0,0.0],"total":2.1},{"name":"StarOS App","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"Designer","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.1,0.1,0.1,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.3},{"name":"Go Core","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.4,0.4,0.0,0.0,0.0,0.0,0.3,0.3,0.3,0.1,0.0,0.0],"total":1.8},{"name":"GO Agent WB","group":"Salute(Исаева Мария)/SHBE (Вадим Трегубов)","m":[0.0,0.0,0.0,0.0,0.5,0.5,0.5,0.3,0.3,0.0,0.0,0.0],"total":2.1},{"name":"Extra","group":null,"m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"B2B Present PM","group":"Extra","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"B2B Present Go","group":"Extra","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"total":0.0},{"name":"Chamber (Телешов)","group":null,"m":[0.0,0.0,0.0,0.0,0.0,0.1,0.2,0.7,0.7,0.7,0.1,0.0],"total":2.5},{"name":"Chamber specialist","group":"Chamber (Телешов)","m":[0.0,0.0,0.0,0.0,0.0,0.1,0.2,0.5,0.5,0.5,0.1,0.0],"total":1.9},{"name":"Chamber HW TPM","group":"Chamber (Телешов)","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.0,0.0],"total":0.6},{"name":"RnD","group":null,"m":[0.0,0.0,0.0,0.0,0.1,0.2,0.3,0.3,0.2,0.1,0.0,0.0],"total":1.2},{"name":"Валидация образцов,PRD, HW","group":"RnD","m":[0.0,0.0,0.0,0.0,0.1,0.2,0.3,0.3,0.2,0.1,0.0,0.0],"total":1.2}],"total":[1.95,2.75,4.35,6.35,9.0,9.2,9.4,9.65,10.05,7.85,5.05,3.35],"group_fot":{"kernel/moira team":13299999.999999998,"QA":10990000,"Сорсинг":1260000.0000000005,"Production":1400000,"Other":525000,"Package":2169999.9999999995,"Management":15750000,"GTM Stream":0,"Salute(Исаева Мария)/SHBE (Вадим Трегубов)":7280000,"Extra":0,"Chamber (Телешов)":1750000,"RnD":840000.0000000001},"group_total":{"kernel/moira team":19.0,"QA":15.7,"Сорсинг":1.8,"Production":2.0,"Other":0.75,"Package":3.1,"Management":22.5,"GTM Stream":0.0,"Salute(Исаева Мария)/SHBE (Вадим Трегубов)":10.4,"Extra":0.0,"Chamber (Телешов)":2.5,"RnD":1.2,"SZ engineers team":0.07},"rate":700000,"budget_month":[1365000,1925000,3045000,4445000,6300000,6440000,6580000,6755000,7035000,5495000,3535000,2345000],"fot_total":55265000,"total_all":63265000,"extra":[["NRE",1000000],["Пресс-формы",4500000],["Стенды, образцы, командировки",1500000],["Маркетинг (по необходимости)",0],["Иное / резерв",1000000]],"extra_sum":8000000};
+const MONTHS=D.months;
+const fmt=v=>(v===null||v===undefined)?"—":(v===0?"0":(Math.round(v*100)/100).toString().replace(".",","));
+const money=v=>Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g," ");
+const monLab=m=>{const[a,b]=m.split(" ");return a.toLowerCase()+" "+b.slice(2);};
+const monNum=m=>{const[a,b]=m.split(" ");const i=["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"].indexOf(a);return String(i+1).padStart(2,"0")+"."+b;};
+
+const AX=70,BX=860,YB=294,YT=20;
+function svgChart(el,values,o){
+  const n=values.length,step=(BX-AX)/n,bw=Math.min(40.8,step-9);
+  const gid=o.gid||"gr";
+  let vmax=Math.max.apply(null,values.concat([o.floor||0.0001]));
+  if(o.axMax)vmax=o.axMax;
+  let s='<svg viewBox="0 0 880 340" width="100%" height="340" role="img" aria-label="'+o.aria+'">'+
+    '<defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1">'+
+    '<stop offset="0" stop-color="#4fb4e0"/><stop offset="1" stop-color="#1b7fb8"/></linearGradient></defs>';
+  for(let i=0;i<=4;i++){
+    const y=YB-(YB-YT)*i/4;
+    s+='<line class="gline" x1="'+AX+'" y1="'+y.toFixed(1)+'" x2="'+BX+'" y2="'+y.toFixed(1)+'"/>'+
+       '<text class="glab" x="62" y="'+(y+3.8).toFixed(1)+'" text-anchor="end">'+o.axis(vmax*i/4)+'</text>';
+  }
+  s+='<line x1="'+AX+'" y1="'+YB+'" x2="'+BX+'" y2="'+YB+'" stroke="#bcd8e8"/>';
+  values.forEach((v,i)=>{
+    const h=Math.max(1.5,v/vmax*(YB-YT)),y=YB-h;
+    const x=AX+step*i+(step-bw)/2,cx=x+bw/2;
+    s+='<rect class="bar" style="fill:url(#'+gid+')" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="3" data-full="'+o.full(v)+'" data-m="'+o.m(i)+'"></rect>'+
+       '<text class="bval" x="'+cx.toFixed(1)+'" y="'+(y-5.5).toFixed(1)+'" text-anchor="middle">'+o.val(v)+'</text>'+
+       '<text class="bmon" x="'+cx.toFixed(1)+'" y="310" text-anchor="middle">'+o.mon(i)+'</text>';
+  });
+  el.innerHTML=s+'</svg>';
 }
-render(ROWS);
-function filterRes(){
-  const v=sel.value;const list=v?ROWS.filter(r=>r.n===v):ROWS;render(list);
-  document.getElementById('resInfo').textContent=v?`Показан ресурс «${v}» — направление: ${list[0].c}. Трудозатраты: ${list[0].q} чел/мес.`:'Показаны все ресурсы проекта.';
-}
+
+/* ---------- вкладки ---------- */
 function setMode(m){
-  const res=m==='res';
-  document.getElementById('mRes').classList.toggle('on',res);
-  document.getElementById('mBud').classList.toggle('on',!res);
-  document.getElementById('tRes').classList.toggle('on',res);
-  document.getElementById('tBud').classList.toggle('on',!res);
-  window.scrollTo({top:0,behavior:'smooth'});
+  const res=m==="res";
+  document.getElementById("mRes").classList.toggle("on",res);
+  document.getElementById("mBud").classList.toggle("on",!res);
+  document.getElementById("tRes").classList.toggle("on",res);
+  document.getElementById("tBud").classList.toggle("on",!res);
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-const tip=document.getElementById('tip');
-document.querySelectorAll('svg .bar').forEach(b=>{
-  b.addEventListener('mousemove',e=>{tip.style.opacity=1;tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY-28)+'px';
-    tip.textContent=b.dataset.m+': '+b.dataset.full+' руб.';});
-  b.addEventListener('mouseleave',()=>tip.style.opacity=0);
-});
+
+/* ---------- таблица ресурсов ---------- */
+const DIRMAP={
+  "kernel/moira team":"Ядро / Moira team",
+  "Salute(Исаева Мария)/SHBE (Вадим Трегубов)":"Salute / SHBE",
+  "Chamber (Телешов)":"Chamber"
+};
+const dirOf=g=>DIRMAP[g]||g;
+const DZO="Salute(Исаева Мария)/SHBE (Вадим Трегубов)";
+const NO_STAFF=["Go scenarios","GO Agent WB","Chamber specialist","Chamber HW TPM"];
+const RATE_PAO=700000,RATE_DZO=1000000;
+
+/* плоский список ролей: дети групп + самостоятельные роли без вложенных */
+const ROLES=[];
+D.rows.filter(r=>r.group).forEach(r=>ROLES.push({
+  n:r.name,dir:dirOf(r.group),m:r.m,q:r.total,
+  rate:r.group===DZO?RATE_DZO:RATE_PAO,staff:NO_STAFF.includes(r.name)?"—":"да"
+}));
+D.rows.filter(r=>!r.group&&!D.rows.some(x=>x.group===r.name)).forEach(r=>ROLES.push({
+  n:r.name,dir:"QA",m:r.m,q:r.total,rate:RATE_PAO,staff:NO_STAFF.includes(r.name)?"—":"да"
+}));
+const _all=ROLES.splice(0,ROLES.length);
+_all.filter(r=>r.q>0).forEach(r=>ROLES.push(r));
+ROLES.forEach(r=>r.cost=r.q*r.rate);
+const DIRS=[...new Set(ROLES.map(r=>r.dir))];
+
+const rowHtml=r=>'<tr><td class="l">'+r.n+'</td><td><span class="pill">'+r.dir+'</span></td>'+
+  '<td>'+r.staff+'</td><td class="num">'+fmt(r.q)+'</td>'+
+  '<td class="num">'+money(r.rate)+'</td><td class="num">'+money(r.cost)+'</td></tr>';
+function renderTable(f){
+  const list=f==="__all__"?ROLES:ROLES.filter(r=>r.dir===f);
+  document.getElementById("resBody").innerHTML=list.map(rowHtml).join("");
+  document.getElementById("fQ").textContent=fmt(list.reduce((a,r)=>a+r.q,0));
+  document.getElementById("fC").textContent=money(list.reduce((a,r)=>a+r.cost,0));
+  const who=f==="__all__"?"Профили команды, загрузка":("Направление «"+f+"», загрузка");
+  document.getElementById("tblHint").textContent=who+" в человеко-месяцах (чел/мес) и стоимость по документу. Ставка: ПАО — 700 000 руб./чел-мес, ДЗО — 1 000 000 руб./чел-мес (по данным файла).";
+  document.getElementById("chartTitle").textContent=(f==="__all__"?"Загрузка всех ресурсов":"Загрузка направления «"+f+"»")+
+    " по месяцам, чел/мес. Ось X — месяц, ось Y — чел/мес. Наведите курсор на столбец для точного значения.";
+}
+function seriesFor(f){
+  if(f==="__all__")return D.total;
+  return MONTHS.map((_,i)=>ROLES.filter(r=>r.dir===f).reduce((a,r)=>a+(r.m[i]||0),0));
+}
+function renderChart(f){
+  svgChart(document.getElementById("resChart"),seriesFor(f),{
+    aria:"Гистограмма загрузки по месяцам",floor:0.2,gid:"grRes",
+    axis:v=>fmt(Math.round(v*10)/10),
+    val:v=>fmt(v),full:v=>fmt(v)+" чел/мес",
+    mon:i=>MONTHS[i],m:i=>monNum(MONTHS[i])
+  });
+}
+function applyFilter(){
+  const v=document.getElementById("resSel").value;
+  renderTable(v);renderChart(v);
+  const list=v==="__all__"?ROLES:ROLES.filter(r=>r.dir===v);
+  document.getElementById("resInfo").textContent=v==="__all__"
+    ? "Показаны все ресурсы проекта. Итог по месяцам — 78,95 чел/мес, профилей: "+ROLES.length+"."
+    : "Показано направление «"+v+"»: профилей "+list.length+", трудозатраты "+fmt(list.reduce((a,r)=>a+r.q,0))+" чел/мес.";
+}
+(function initRes(){
+  const sel=document.getElementById("resSel");
+  DIRS.forEach(g=>{const o=document.createElement("option");o.value=g;o.textContent=g;sel.appendChild(o);});
+  applyFilter();
+})();
+
+/* ---------- бюджет ---------- */
+(function initBud(){
+  svgChart(document.getElementById("budChart"),D.budget_month,{
+    aria:"График помесячных затрат",axMax:Math.max.apply(null,D.budget_month),gid:"grBud",
+    axis:v=>(v/1e6).toFixed(1).replace(".",",")+" млн",
+    val:v=>fmt(v/1e6)+" млн.",full:v=>fmt(v/1e6)+" млн. руб.",
+    mon:i=>MONTHS[i],m:i=>monNum(MONTHS[i])
+  });
+  const tip=document.getElementById("tip");
+  document.querySelectorAll(".bwrap svg .bar").forEach(b=>{
+    b.addEventListener("mousemove",e=>{
+      const[v,u]=String(b.dataset.full).split(" ");
+      tip.style.opacity=1;tip.style.left=(e.clientX+12)+"px";tip.style.top=(e.clientY-28)+"px";
+      tip.textContent=b.dataset.m+": "+b.dataset.full;
+    });
+    b.addEventListener("mouseleave",()=>{tip.style.opacity=0;});
+  });
+})();
+
+/* ---------- подсказки для гистограммы ресурсов ---------- */
+(function wireTip(){
+  const tip=document.getElementById("tip");
+  document.getElementById("resChart").addEventListener("mousemove",e=>{
+    const b=e.target.closest(".bar");if(!b)return;
+    tip.style.opacity=1;tip.style.left=(e.clientX+12)+"px";tip.style.top=(e.clientY-28)+"px";
+    tip.textContent=b.dataset.m+": "+b.dataset.full;
+  });
+  document.getElementById("resChart").addEventListener("mouseleave",()=>{tip.style.opacity=0;});
+})();
 </script>
 </body>
 </html>
